@@ -1,8 +1,8 @@
 # Git Jidoka :hammer:
 
-Automate GitHub repository creation. More commands to come.
+Automate GitHub repository creation.
 
-![](header.png)
+![alt text](https://i.imgur.com/FxLZJJH.png)
 
 ## Setup :wrench:
 
@@ -10,12 +10,12 @@ Automate GitHub repository creation. More commands to come.
 
 2. Create a personal access token for GitHub [here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
 
-3. Move/Copy/Create/Save the `.git-jidoka-script.sh` to your home directory (`cd`). _HINT: You can run `./setup.sh` here_
+3. Clone this repository and run `./setup.sh` to source and copy the `.git-jidoka-script.sh` to your home directory (`cd`). Or you can do this manually
 
 4. Source the bash script and add your personal access token into your `~/.bashrc`. Example:
 
 ```bash
-# Insert this line inside your ~/.bashrc
+# Change the GITHUB_API_TOKEN accordingly and the line below inside your ~/.bashrc
 export GITHUB_API_TOKEN=fac086307dab129b81ca11a842bb94acd0d98f99
 source ~/.git-jidoka-script.sh
 ```
