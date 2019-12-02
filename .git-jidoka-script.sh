@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Automate repository creation on GitHub
 git-create-project() {
 
     # --- Functions --- #
@@ -23,7 +24,7 @@ git-create-project() {
         git remote add origin git@github.com:$USERNAME/$REPOSITORY_NAME.git
         git add .gitignore README.md
         git commit -m "First commit"
-        git push --set-upstream origin master
+        git push --set-upstream origin $ref_branch
     }
 
     # --- Main --- #
@@ -38,4 +39,26 @@ git-create-project() {
     else
         echo "👋 Bye"
     fi
+}
+
+# My commit history doesn't make sense, I need a fresh start
+git-squash() {
+    ref_branch=$1
+    work_branch=$2
+
+    # At work_branch
+    git pull origin $ref_branch
+
+    # At $ref_branch branch
+    git checkout $ref_branch
+    git pull origin $ref_branch
+    git diff $ref_branch $work_branch >~/$work_branch.patch
+
+    # Create a backup branch
+    git branch -m $work_branch $work_branch-BAK
+    git checkout -b $work_branch
+    git apply ~/$work_branch.patch
+    git status
+
+    echo "👍 Done"
 }
