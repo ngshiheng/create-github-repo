@@ -1,9 +1,9 @@
-#! /bin/bash
+#!/bin/bash
 
-start-git-project() {
+git-create-project() {
 
     # --- Functions --- #
-    make_local_dir() {
+    mk_cd_local_dir() {
         echo "📂 Creating new project folder <$REPOSITORY_NAME> "
         mkdir ${REPOSITORY_NAME}
         cd ${REPOSITORY_NAME}
@@ -12,27 +12,29 @@ start-git-project() {
         touch .gitignore README.md
     }
 
-    create_setup_git_repo() {
-        echo "🛠  Creating public repository <$REPOSITORY_NAME>"
-        curl -i -X POST https://api.github.com/user/repos \
-            -H "Authorization: token $GITHUB_API_TOKEN " \
-            -d "{\"name\":\"$REPOSITORY_NAME\", \"auto_init\": false, \"private\":false, \"license_template\":\"mit\"}"
+    github_login_create_repository() {
+        echo "👦 Logging in & creating public repository <$REPOSITORY_NAME>"
+        curl -u "$USERNAME:$GITHUB_API_TOKEN" https://api.github.com/user/repos \
+            -d "{\"name\":\"$REPOSITORY_NAME\"}"
+    }
+
+    github_push_first_commit() {
+        echo "🛠 Commiting & pushing README.md & .gitiginore"
         git remote add origin git@github.com:$USERNAME/$REPOSITORY_NAME.git
-        git pull origin master
         git add .gitignore README.md
         git commit -m "First commit"
         git push --set-upstream origin master
     }
 
     # --- Main --- #
-
     read -p "📝 Enter your new public repository name: " REPOSITORY_NAME
     read -p "🐱 Enter your GitHub username: " USERNAME
     read -p "❓ Confirm to create public repository <$REPOSITORY_NAME> on GitHub? (Press <y/N> to continue) "
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        make_local_dir
-        create_setup_git_repo
-        echo "👌 Done"
+        mk_cd_local_dir
+        github_login_create_repository
+        github_push_first_commit
+        echo "👌 Done. Current directory: <$PWD>"
     else
         echo "👋 Bye"
     fi

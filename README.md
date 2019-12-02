@@ -1,8 +1,6 @@
-# Git Create :hammer:
+# Git Jidoka :hammer:
 
-Setting up and creating a Git repository is too much of a hassle, if you do it a lot
-
-Hence I came up with this simple script where you can create a GitHub repository with a single line of command `create-git` in your Linux machine
+Automate GitHub repository creation. More commands to come.
 
 ![](header.png)
 
@@ -10,22 +8,22 @@ Hence I came up with this simple script where you can create a GitHub repository
 
 1. Setup SSH [here](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
 
-1. Create a personal access token for GitHub [here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+2. Create a personal access token for GitHub [here](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
 
-1. Move/Copy/Create/Save the `.create-github-repo.sh` to your home directory (`cd`)
+3. Move/Copy/Create/Save the `.git-jidoka-script.sh` to your home directory (`cd`). _HINT: You can run `./setup.sh` here_
 
-1. Source the bash script and add your personal access token into your `~/.bashrc`. Example:
+4. Source the bash script and add your personal access token into your `~/.bashrc`. Example:
 
 ```bash
 # Insert this line inside your ~/.bashrc
 export GITHUB_API_TOKEN=fac086307dab129b81ca11a842bb94acd0d98f99
-source ~/.create-github-repo.sh
+source ~/.git-jidoka-script.sh
 ```
 
 ## Usage example :page_with_curl:
 
 ```bash
-start-git-project
+git-create-project
 ```
 
 ## Contributing :construction_worker:
