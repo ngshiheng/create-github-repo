@@ -17,22 +17,21 @@
 4. Source the bash script and add your personal access token into your `~/.bashrc`. Example:
 
 ```bash
-# Change the GITHUB_API_TOKEN accordingly and the line below inside your ~/.bashrc (This is just a dummy token)
+# Change the GITHUB_API_TOKEN accordingly and the line below inside your ~/.bashrc (Note: this is just a dummy token)
 export GITHUB_API_TOKEN=fac086307dab129b81ca11a842bb94acd0d98f99
 source ~/.git-jidoka-script.sh
 ```
 
-
 ## Usage example :page_with_curl:
 
-### I'm too lazy to click buttons: create a repository on GitHub with a single command
+#### I'm too lazy to click buttons: create a repository on GitHub with a single command
 ```bash
 git-create-project
 ```
 
-### My commit history doesn't make sense, I need a fresh start. Make sure you run this command at your work branch
+#### My commit history doesn't make sense, I need a fresh start. Make sure you run this command at your work branch
 ```bash
-git-squash master work-branch-name
+git-squash master feature/fooBar
 ```
 
 ## Contributing :construction_worker:
