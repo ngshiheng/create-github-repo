@@ -1,6 +1,8 @@
 # Git Jidoka :hammer:
 
-Automate GitHub repository creation.
+**Current Feature:**
+- Create a repository on your GitHub
+- Committed too frequently? Made a minor mistake on your commit? Squash everything into a single commit!
 
 ![alt text](https://i.imgur.com/FxLZJJH.png)
 
@@ -15,15 +17,22 @@ Automate GitHub repository creation.
 4. Source the bash script and add your personal access token into your `~/.bashrc`. Example:
 
 ```bash
-# Change the GITHUB_API_TOKEN accordingly and the line below inside your ~/.bashrc
+# Change the GITHUB_API_TOKEN accordingly and the line below inside your ~/.bashrc (This is just a dummy token)
 export GITHUB_API_TOKEN=fac086307dab129b81ca11a842bb94acd0d98f99
 source ~/.git-jidoka-script.sh
 ```
 
+
 ## Usage example :page_with_curl:
 
+### I'm too lazy to click buttons: create a repository on GitHub with a single command
 ```bash
 git-create-project
+```
+
+### My commit history doesn't make sense, I need a fresh start. Make sure you run this command at your work branch
+```bash
+git-squash master work-branch-name
 ```
 
 ## Contributing :construction_worker:
