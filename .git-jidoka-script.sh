@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Automate repository creation on GitHub
+# I'm too lazy to click buttons: create a repository on GitHub with a single command
 git-create-project() {
-
-    # --- Functions --- #
     mk_cd_local_dir() {
         echo "📂 Creating new project folder <$REPOSITORY_NAME> "
         mkdir ${REPOSITORY_NAME}
@@ -24,7 +22,7 @@ git-create-project() {
         git remote add origin git@github.com:$USERNAME/$REPOSITORY_NAME.git
         git add .gitignore README.md
         git commit -m "First commit"
-        git push --set-upstream origin $ref_branch
+        git push --set-upstream origin master
     }
 
     # --- Main --- #
@@ -41,15 +39,16 @@ git-create-project() {
     fi
 }
 
-# My commit history doesn't make sense, I need a fresh start
+# My commit history doesn't make sense, I need a fresh start. Make sure you run this command at your work branch
 git-squash() {
     ref_branch=$1
     work_branch=$2
 
     # At work_branch
+    git branch -D $work_branch-BAK
     git pull origin $ref_branch
 
-    # At $ref_branch branch
+    # At ref_branch branch
     git checkout $ref_branch
     git pull origin $ref_branch
     git diff $ref_branch $work_branch >~/$work_branch.patch
@@ -59,6 +58,5 @@ git-squash() {
     git checkout -b $work_branch
     git apply ~/$work_branch.patch
     git status
-
     echo "👍 Done"
 }
