@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # I'm too lazy to click buttons: create a repository on GitHub with a single command
 git-create-project() {
     mk_cd_local_dir() {
         echo "📂 Creating new project folder <$REPOSITORY_NAME> "
-        mkdir ${REPOSITORY_NAME}
-        cd ${REPOSITORY_NAME}
+        mkdir "${REPOSITORY_NAME}"
+        cd "${REPOSITORY_NAME}" || exit
         git init
         echo "📄 Creating empty .gitignore & README.md"
         touch .gitignore README.md
@@ -19,7 +19,7 @@ git-create-project() {
 
     github_push_first_commit() {
         echo "🛠 Commiting & pushing README.md & .gitiginore"
-        git remote add origin git@github.com:$USERNAME/$REPOSITORY_NAME.git
+        git remote add origin git@github.com:"$USERNAME"/"$REPOSITORY_NAME".git
         git add .gitignore README.md
         git commit -m "First commit"
         git push --set-upstream origin master
@@ -45,18 +45,17 @@ git-squash() {
     work_branch=$2
 
     # At work_branch
-    git branch -D $work_branch-BAK
-    git pull origin $ref_branch
+    git branch -D "$work_branch"-BAK
 
     # At ref_branch branch
-    git checkout $ref_branch
-    git pull origin $ref_branch
-    git diff $ref_branch $work_branch >~/$work_branch.patch
+    git checkout "$ref_branch"
+    git pull origin "$ref_branch"
+    git diff "$ref_branch" "$work_branch" >~/"$work_branch".patch
 
     # Create a backup branch
-    git branch -m $work_branch $work_branch-BAK
-    git checkout -b $work_branch
-    git apply ~/$work_branch.patch
+    git branch -m "$work_branch" "$work_branch"-BAK
+    git checkout -b "$work_branch"
+    git apply ~/"$work_branch".patch
     git status
     echo "👍 Done"
 }

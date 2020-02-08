@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Run this is you're setting up for the first time:
 # echo "source ~/.git-jidoka-script.sh" >> ~/.bashrc
