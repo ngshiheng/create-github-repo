@@ -47,9 +47,16 @@ git-squash() {
     # At work_branch
     git branch -D "$work_branch"-BAK
 
-    # At ref_branch branch
+    # At ref_branch
     git checkout "$ref_branch"
     git pull origin "$ref_branch"
+
+    # At work_branch
+    git checkout "$work_branch"
+    git rebase origin/"$ref_branch"
+
+    # At ref_branch
+    git checkout "$ref_branch"
     git diff "$ref_branch" "$work_branch" >~/"$work_branch".patch
 
     # Create a backup branch
