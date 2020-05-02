@@ -1,5 +1,14 @@
 #!/bin/sh
 
+LICENSE_GIST="https://gist.githubusercontent.com/ngshiheng/3f016ed77515a9282bd1375cc89a1690/raw/1e9d3d9d6a303217ad83fb4e3e1151bb0f93de22/LICENSE"
+README_GIST="https://gist.githubusercontent.com/ngshiheng/7c3e91235c3ea11865472ef5116dc5c1/raw/879e5f5fb2fec31cb534306c61eccc5512b0ea26/README.md"
+
+# Test if the script is reloaded
+jidoka-test() {
+    export TZ="Asia/Singapore"
+    echo "Hello world! The current time is: $(date +"%d-%B-%Y %r")"
+}
+
 # I'm too lazy to click buttons: create a repository on GitHub with a single command
 git-create-project() {
     mk_cd_local_dir() {
@@ -7,8 +16,11 @@ git-create-project() {
         mkdir "${REPOSITORY_NAME}"
         cd "${REPOSITORY_NAME}" || exit
         git init
-        echo "📄 Creating empty .gitignore & README.md"
-        touch .gitignore README.md
+        echo "📄 Creating empty .gitignore, README.md template and a MIT LICENSE file"
+        touch .gitignore
+        curl "$README_GIST" >README.md
+        curl "$LICENSE_GIST" >LICENSE
+
     }
 
     github_login_create_repository() {
@@ -65,4 +77,23 @@ git-squash() {
     git apply ~/"$work_branch".patch
     git status
     echo "👍 Done"
+}
+
+kickstart-node() {
+    # Feel free to change yarn to npm
+    mkdir "$1" && cd "$1" && git init && yarn init -y
+    curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore >.gitignore
+    curl "$README_GIST" >README.md
+    curl "$LICENSE_GIST" >LICENSE
+    code .
+    echo "Let's build something awesome with Node.js! 💪"
+}
+
+kickstart-python() {
+    mkdir "$1" && cd "$1" && git init && pipenv shell
+    curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore >.gitignore
+    curl "$README_GIST" >README.md
+    curl "$LICENSE_GIST" >LICENSE
+    code .
+    echo "Ready to build something cool with Python? 🐍"
 }

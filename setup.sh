@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run this is you're setting up for the first time:
-echo "source ~/.git-jidoka-script.sh" >> ~/.zshrc
-echo "🥳 Finished setup."
-echo "HINT: run 'git-create-project' to create a new repository on GitHub"
+# Run this once you're setting up for the first time, to reload the script, simply source your shell profile (.bashrc, .zshrc etc) again
+echo "source $PWD/.git-jidoka-script.sh" >>~/.zshrc
+echo "🥳 Finished setup"
+echo "HINT: checkout the README usage example section"
