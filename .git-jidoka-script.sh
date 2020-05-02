@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # I'm too lazy to click buttons: create a repository on GitHub with a single command
 git-create-project() {
